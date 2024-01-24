@@ -18,6 +18,10 @@
 		}
 	</style>
 	<style>
+		.title {
+			text-overflow: ellipsis;
+		}
+
 		body {
 			font-family: 'Arial', sans-serif;
 			background-color: #f4f4f4;
@@ -37,9 +41,10 @@
 			text-align: center;
 		}
 
-		h1 {
-			margin-top: 50px;
-			text-align: center;
+		h3 {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
 		table {
@@ -204,6 +209,31 @@
 	<script th:inline="javascript">
 
 		$(document).ready(function () {
+			var h3Elements = $('.title');
+			var content = $('.content');
+			console.log(h3Elements);
+
+			h3Elements.each(function () {
+				var maxLength = 10; // 최대 글자 수
+				var text = $(this).text();
+
+				if (text.length > maxLength) {
+					var truncatedText = text.substring(0, maxLength) + "...";
+					$(this).text(truncatedText);
+				}
+			});
+
+			content.each(function () {
+				var maxLength = 20; // 최대 글자 수
+				var text = $(this).text();
+
+				if (text.length > maxLength) {
+					var truncatedText = text.substring(0, maxLength) + "...";
+					$(this).text(truncatedText);
+				}
+			});
+
+
 			$('.package-item').click(function () {
 				var bno = $(this).attr('bbno');
 				location.href = "./read?boardnum=" + bno;
@@ -303,10 +333,9 @@
 							</div>
 						</div>
 						<div class="text-center">
-							<p style="font-size: 30px;" class="mb-0" th:text="${board.bookTitle}"></p>
-							<p style="font-size: 20px; margin-top: 20px;" th:utext="${board.content}"></p>
-							<p style="font-size: 30px;" class="mb-0" th:text="${board.price}">
-								</h3>
+							<p style="font-size: 30px;" class="title mb-0" th:text="${board.bookTitle}"></p>
+							<div class="content card-title" style="margin-top: 30px;" th:utext="${board.content}"></div>
+							<p style="font-size: 30px;" itemtype="margin-top: 30px" th:text="${board.price}"></p>
 
 						</div>
 
