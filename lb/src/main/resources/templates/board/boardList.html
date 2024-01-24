@@ -11,6 +11,30 @@
 			<title>게시판</title>
 			<script>
 				$(document).ready(function () {
+					var h3Elements = $('.title');
+					var content = $('.content');
+					console.log(h3Elements);
+
+					h3Elements.each(function () {
+						var maxLength = 10; // 최대 글자 수
+						var text = $(this).text();
+
+						if (text.length > maxLength) {
+							var truncatedText = text.substring(0, maxLength) + "...";
+							$(this).text(truncatedText);
+						}
+					});
+					
+					content.each(function () {
+						var maxLength = 50; // 최대 글자 수
+						var text = $(this).text();
+
+						if (text.length > maxLength) {
+							var truncatedText = text.substring(0, maxLength) + "...";
+							$(this).text(truncatedText);
+						}
+					});
+
 					$('.card').click(function () {
 						var bno = $(this).attr('bno');
 						location.href = "./read?bno=" + bno;
@@ -41,9 +65,9 @@
 					<!-- 첫 번째 서비스 카드 -->
 					<div class="card service-item rounded pt-3" th:bno="${board.bno}">
 						<div class="p-4">
-							<h4 th:text="${board.title}"></h4>
+							<h4 class="title" th:text="${board.title}"></h4>
 							<p th:text="${board.id}"></p>
-							<div class="card-title" th:utext="${board.content}"></div>
+							<div class="content card-title" th:utext="${board.content}"></div>
 						</div>
 					</div>
 					<!-- ... -->
