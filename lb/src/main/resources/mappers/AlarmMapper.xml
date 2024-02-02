@@ -44,7 +44,7 @@
 	</update>
 	
 	<select id="selectBoardId" parameterType="int" resultType="String">
-		select distinct id from board where bno = #{bno} 
+		select distinct id from review where bno = #{bno} 
 	</select>
 
 </mapper>
